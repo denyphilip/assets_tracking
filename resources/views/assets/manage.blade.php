@@ -11,8 +11,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Manage Assets</li>
+              {{-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Manage Assets</li> --}}
             </ol>
           </div>
         </div>
@@ -30,41 +30,47 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>id</th>
+                    <th>S.No</th>
                     <th>Asset Name</th>
                     <th>Asset Type</th>
                     <th>Asset Code</th>
+                  
                     <th>Created At</th>
                     <th>Updated At</th>
+                    <th>Click to change Status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
                       @foreach ($assets as $item)
                           <tr>
-                              <td>{{$item->id}}</td>
+                              <td>{{$loop->iteration}}</td>
                               <td>{{$item->asset_name}}</td>
                               <td>{{$item->type->asset_type_name}}</td>
                               <td>{{$item->asset_code}}</td>
-                              <td>{{date("d-M-Y ",strtotime($item->created_at))}}</td>
+                              
+                              <td>{{date("d-M-Y ",strtotime($item->created_at))}}</td>&nbsp;
                               <td>{{date("d-M-Y",strtotime($item->updated_at))}}</td>
+                              <td class="text-center">
+                                @php
+                                if($item->is_active == false){
+                               @endphp 
+
+                               <a href="{{route('active',['id'=> $item->id])}}" class="badge text-white text-center bg-dark btn-sm">Inactive</a>
+                               
+                                 @php
+                                     }else{
+                                 @endphp
+                                 
+                                 <a href="{{route('in_active',['id'=> $item->id])}}" class="badge text-white bg-success btn-sm">Active</a>
+
+                                 @php
+                                   }  
+                                 @endphp 
+                              </td>
                               <td>
-                                  @php
-                                   if($item->is_active == false){
-                                  @endphp 
-
-                                    <a href="{{route('active',['id'=> $item->id])}}" class="btn btn-success btn-sm">Active</a>
-                                  
-                                    @php
-                                        }else{
-                                    @endphp
-
-                                    <a href="{{route('in_active',['id'=> $item->id])}}" class="btn btn-dark btn-sm">Deactivate</a>
-
-                                    @php
-                                      }  
-                                    @endphp
-                                  <button type="button" data-bs-target="#data{{$item->id}}" data-bs-toggle="modal" class="btn btn-danger btn-sm">Trash</button>
+                                 
+                                  <button type="button" data-bs-target="#data{{$item->id}}" data-bs-toggle="modal" class="btn btn-danger btn-sm">Delete</button>
                                     {{-- modal for delete --}}
 
                                     <div class="modal fade" id="data{{$item->id}}">
@@ -85,7 +91,7 @@
                                         </div>
                                     </div>
                                     
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#update{{$item->id}}" class="btn btn-info btn-sm">Update</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#update{{$item->id}}" class="btn btn-info btn-sm">Edit</button>
 
                                     <div class="modal fade" id="update{{$item->id}}">
                                         <div class="modal-dialog">
@@ -121,9 +127,10 @@
                                                             </div>
                                                             <!-- /.card-body -->
                                               
-                                                            
-                                                        <input type="submit" value="Update" class="btn btn-success">
-                                                    </form>
+                                                            <div class="card-footer">
+                                                        <input type="submit" value="Update" class="btn btn-success" style="width:100px;text-align:center;">
+                                                            </div>
+                                                      </form>
                                                 </div>
                                             </div>
                                             </div>

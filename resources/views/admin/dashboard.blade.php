@@ -13,8 +13,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('homepage')}}">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
+              {{-- <li class="breadcrumb-item"><a href="{{route('homepage')}}">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li> --}}
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -120,11 +120,11 @@ var areaChartData = {
           pointStrokeColor    : 'rgba(60,141,188,1)',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [@json($assets->count())]
+          data                : [5,@json($assets->count())]
         },
         {
           label               : 'InActive',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
+          backgroundColor     : 'grey',
           borderColor         : 'rgba(210, 214, 222, 1)',
           pointRadius         : false,
           pointColor          : 'rgba(210, 214, 222, 1)',
@@ -133,14 +133,14 @@ var areaChartData = {
           pointHighlightStroke: 'rgba(220,220,220,1)',
           data                : [@json($assetInActive->count()),@json($assetInActive->count())+10]
         },
-      ]
-    }
+      ] 
+    } 
      //-------------
     //- BAR CHART -
     //-------------
     var barChartCanvas = $('#barChart').get(0).getContext('2d')
     var barChartData = $.extend(true, {}, areaChartData)
-    var temp0 = areaChartData.datasets[0]
+    var temp0 = areaChartData.datasets[0] 
     var temp1 = areaChartData.datasets[1]
     barChartData.datasets[0] = temp1
     barChartData.datasets[1] = temp0
@@ -174,7 +174,7 @@ var areaChartData = {
       {
         data: val
        ,
-        backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        backgroundColor : ['orange', 'red', 'green', 'blue', 'yellow', 'brown'],
       }
     ]
   }
@@ -190,7 +190,7 @@ var areaChartData = {
     responsive : true,
   }
   //Create pie or douhnut chart
-  // You can switch between pie and douhnut using the method below.
+  // we can switch between pie and douhnut using the method below.
   new Chart(pieChartCanvas, {
     type: 'pie',
     data: pieData,

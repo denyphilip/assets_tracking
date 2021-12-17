@@ -16,7 +16,6 @@ class HomeController extends Controller
     public function index(){
         $data['assets'] = Assets::where("is_active",true)->get();
         $data['assetType'] = assetType::all();
-        $data['assetTypeArray'] = assetType::all()->toArray();
         $data['assetInActive'] = Assets::where('is_active',false)->get();
         return view('admin/dashboard',$data);
     }

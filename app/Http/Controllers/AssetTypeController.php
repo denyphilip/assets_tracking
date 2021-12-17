@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AssetType;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class AssetTypeController extends Controller
 {
@@ -23,7 +24,7 @@ class AssetTypeController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'asset_type_name' => 'required',
+            'asset_type_name' => 'required|unique:asset_types,asset_type_name',
             'asset_type_description' => 'required',
         ]);
 
@@ -31,14 +32,21 @@ class AssetTypeController extends Controller
         return redirect()->route('asset-type.index');
     }
 
- 
+    public function edit(Request $request,AssetType $assetType){
+        return view('assetType/edit',['item'=> $assetType]);
+    }
     public function update(Request $request, AssetType $assetType)
     {
         //
+        $data = $request->validate([
+            'asset_type_name' => 'required',
+            'asset_type_description' => 'required',
+       
+        ]);
         $assetType->asset_type_name = $request->asset_type_name;
         $assetType->asset_type_description = $request->asset_type_description;
         $assetType->save();
-        return redirect()->back();
+        return redirect()->route('asset-type.index');
     }
 
     public function destroy(AssetType $assetType)

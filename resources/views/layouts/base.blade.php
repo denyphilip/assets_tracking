@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
+  <style>
+    .error{color:red}
+</style>
 </head>
 <!--
 `body` tag options:
@@ -35,7 +38,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('homepage')}}" class="nav-link">Home</a>
+        <a href="{{route('homepage')}}" class="nav-link"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
       </li>
       
      
@@ -44,14 +47,12 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-     <li class="nav-item">
+     {{-- <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{route('asset.create')}}" class="btn btn-success mx-1 border-0">Add Assets</a>
-      </li>
+      </li> --}}
+     
      
       <li class="nav-item">
           <form action="{{ route('logout') }}" method="POST">
@@ -92,27 +93,28 @@
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
-                Assets Type
+                Asset Types
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('asset-type.create')}}" class="nav-link small">
-                  <p>
-                    Add Assets Type
-                    <i class="fas fa-angle-right right"></i>
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{route('asset-type.index')}}" class="nav-link small">
                   <p>
-                    Manage Assets Type
-                    <i class="fas fa-angle-right right"></i>
+                    Manage Asset Types
+                    {{-- <i class="fas fa-angle-right right"></i> --}}
                   </p>
                 </a>
                  </li>
+              <li class="nav-item">
+                <a href="{{route('asset-type.create')}}" class="nav-link small">
+                  <p>
+                    Add Asset Types
+                    {{-- <i class="fas fa-angle-right right"></i> --}}
+                  </p>
+                </a>
+              </li>
+              
              
             </ul>
           </li>
@@ -126,30 +128,24 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('asset.create')}}" class="nav-link small">
-                  <p>
-                    Add Assets
-                    <i class="fas fa-angle-right right"></i>
-                  </p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="{{route('asset.index')}}" class="nav-link small">
                   <p>
-                    Manage Active Assets
-                    <i class="fas fa-angle-right right"></i>
+                    Manage Assets
+                    {{-- <i class="fas fa-angle-right right"></i> --}}
                   </p>
                 </a>
                  </li>
-              <li class="nav-item">
-                <a href="{{route('inactive')}}" class="nav-link small">
-                  <p>
-                    Manage Deactivated Assets
-                    <i class="fas fa-angle-right right"></i>
-                  </p>
-                </a>
-                 </li>
+                 <li class="nav-item">
+                  <a href="{{route('asset.create')}}" class="nav-link small">
+                    <p>
+                      Add Assets
+                      {{-- <i class="fas fa-angle-right right"></i> --}}
+                    </p>
+                  </a>
+                </li>
+              
              
             </ul>
           </li>

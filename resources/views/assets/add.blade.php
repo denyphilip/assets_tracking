@@ -19,14 +19,14 @@
               @csrf
               <div class="card-body">
                 <div class="form-group">
-                  <label for="a_name">Assets Name</label>
+                  <label for="a_name">Assets Name<span class="error">*</span></label>
                   <input type="text" class="form-control" id="a_name" name="asset_name" placeholder="Enter Assets Name" value="{{old('asset_name')}}">
                   @error('asset_name')
                     <p class="small text-danger">{{$message}}</p>
                   @enderror
                 </div>
                 <div class="form-group">
-                  <label for="at_name">Assets Type</label>
+                  <label for="at_name">Assets Type<span class="error">*</span></label>
                   <select class="form-select" id="at_name" name="asset_types_id">
                     <option value="">Select Assets Type</option>
                     @foreach ($assetType as $at)
@@ -52,7 +52,7 @@
               <!-- /.card-body -->
 
               <div class="card-footer">
-                <button type="submit" class="float-end btn btn-success">Add Assets</button>
+                <button type="submit" class="float-end btn btn-success" style="width: 100px;">Add</button>
               </div>
             </form>
           </div>

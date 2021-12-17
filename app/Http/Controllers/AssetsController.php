@@ -9,20 +9,20 @@ use Illuminate\Http\Request;
 class AssetsController extends Controller
 {
    
-    public function index($filter = null)
+    public function index()
     {
-        $data['title'] = "Manage Active Assets";
-        $data['assets'] = Assets::where("is_active",true)->paginate(8);
+        $data['title'] = "Manage Assets";
+        $data['assets'] = Assets::paginate(8);
         $data['assetType'] = assetType::all();
         return view('assets.manage',$data);
     }
 
-    public function inactive(){
-        $data['title'] = "Manage Deactivated Assets";
-        $data['assets'] = Assets::where("is_active",false)->paginate(8);
-        $data['assetType'] = assetType::all();
-        return view('assets.manage',$data);
-    }
+    // public function inactive(){
+    //     $data['title'] = "Manage Deactivated Assets";
+    //     $data['assets'] = Assets::where("is_active",false)->paginate(8);
+    //     $data['assetType'] = assetType::all();
+    //     return view('assets.manage',$data);
+    // }
     public function create()
     {
         $data['assetType'] = AssetType::all();
@@ -41,27 +41,6 @@ class AssetsController extends Controller
         return redirect()->route('asset.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Assets  $assets
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Assets $assets)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Assets  $assets
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Assets $assets)
-    {
-        //
-    }
 
    
     public function update(Request $request,$id)
@@ -77,8 +56,7 @@ class AssetsController extends Controller
         $assets->save();
         return redirect()->back();
     }
-
-   
+    
     public function destroy($id)
     {
         $data = Assets::find($id);

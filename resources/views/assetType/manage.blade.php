@@ -11,8 +11,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Manage Asset Type</li>
+              {{-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Manage Asset Type</li> --}}
             </ol>
           </div>
         </div>
@@ -30,7 +30,7 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>id</th>
+                    <th>S.No</th>
                     <th>Asset Type Name</th>
                     <th>Asset Type Description</th>
                     <th>Created At</th>
@@ -41,20 +41,20 @@
                   <tbody>
                       @foreach ($assetTypes as $item)
                           <tr>
-                              <td>{{$item->id}}</td>
+                              <td>{{$loop->iteration}}</td>
                               <td>{{$item->asset_type_name}}</td>
                               <td>{{$item->asset_type_description}}</td>
                               <td>{{date("d-M-Y h:i:s A",strtotime($item->created_at))}}</td>
                               <td>{{date("d-M-Y h:i:s A",strtotime($item->updated_at))}}</td>
                               <td>
-                                    <button type="button" data-bs-target="#data{{$item->id}}" data-bs-toggle="modal" class="btn btn-danger btn-sm">Trash</button>
+                                    <button type="button" data-bs-target="#data{{$item->id}}" data-bs-toggle="modal" class="btn btn-danger btn-sm">Delete</button>
                                     {{-- modal for delete --}}
 
                                     <div class="modal fade" id="data{{$item->id}}">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header text-start">
-                                                    <h6>Area your Ready what to Delete <span class="fw-bold">{{$item->asset_type_name}}'s</span> Records</h6>
+                                                    <h6>Area you sure you want to Delete <span class="fw-bold">{{$item->asset_type_name}}'s</span> Records</h6>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <form action="{{route('asset-type.destroy',['asset_type'=>$item])}}" method="POST">
@@ -66,46 +66,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#update{{$item->id}}" class="btn btn-info btn-sm">Update</button>
-
-                                    <div class="modal fade" id="update{{$item->id}}">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header text-start">
-                                                    <h6>Update <span class="fw-bold">{{$item->asset_type_name}}'s</span> Records</h6>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="{{route('asset-type.update',['asset_type'=>$item])}}" method="POST">
-                                                        @method("put")
-                                                     
-                                                            @csrf
-                                                              <div class="form-group">
-                                                                <label for="at_name">Assets Type Name</label>
-                                                                <input type="text" class="form-control" id="at_name" name="asset_type_name" placeholder="Enter Assets Type Name" value="{{$item->asset_type_name}}">
-                                                                @error('asset_type_name')
-                                                                  <p class="small text-danger">{{$message}}</p>
-                                                                @enderror
-                                                              </div>
-                                                              <div class="form-group">
-                                                                <label for="description">Description</label>
-                                                                <textarea rows="5" class="form-control" name="asset_type_description" id="description" placeholder="description">{{$item->asset_type_description}}</textarea>
-                                                                @error('asset_type_description')
-                                                                  <p class="small text-danger">{{$message}}</p>
-                                                                @enderror
-                                                              </div>
-                                                            </div>
-                                                            <!-- /.card-body -->
-                                              
-                                                            
-                                                        <input type="submit" value="Update" class="btn btn-success">
-                                                       
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    &nbsp;&nbsp;
+                                    <a href="{{route('asset-type.edit',['asset_type'=>$item])}}" class="btn btn-info">Edit</a>
                               </td>
                           </tr>
 
